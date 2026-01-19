@@ -16,7 +16,8 @@ def health():
 
     except :
         db_status = "unhealthy"
-    return {"status": "healthy", "database": db_status}     
+    return {"status": "healthy", "database": db_status}    
+ 
 @app.post("/items")
 def create_Item(name:str , description: str | None = None) :
     db = SessionLocal()
@@ -33,12 +34,14 @@ def get_items():
     items = db.query(Item).all()
     db.close()
     return items
+
 @app.get("/items/{id}")
 def get_item(item_id:int) :
     db = SessionLocal()
     item = db.query(Item).filter(Item.id == item_id).first()
     db.close()
     return item
+
 @app.delete("/items/{id}")
 def delete_item(item_id=int):
     db = SessionLocal()

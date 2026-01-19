@@ -1,0 +1,18 @@
+name: CI # Nom affiché sur GitHub
+
+on:
+  push:
+    branches: [main] # Déclenche quand tu push sur main
+  pull_request:
+    branches: [main] # Déclenche sur les Pull Requests
+
+jobs:
+  build: # Nom du job
+    runs-on: ubuntu-latest # Machine Ubuntu
+
+    steps: # Les étapes à exécuter
+      - name: Checkout code
+        uses: actions/checkout@v4 # Récupère ton code
+
+      - name: Build Docker image
+        run: docker build -t devops-api . # Build l'image

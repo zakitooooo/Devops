@@ -8,6 +8,13 @@ services:
     ports:
       - "5432:5432"
 
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
   pgadmin:
     image: dpage/pgadmin4
     environment:
