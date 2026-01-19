@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import text
 from database import engine, SessionLocal
 from models import Item
+from prometheus_fastapi_instrumentator import Instrumentator
 
 
 
@@ -50,5 +51,10 @@ def delete_item(item_id=int):
     db.commit()
     db.close()
     return {"message" : "Item deleted"}
+
+instrumentator = Instrumentator()
+instrumentator.instrument(app)
+instrumentator.expose(app, endpoint="/metrics")
+
 
 
